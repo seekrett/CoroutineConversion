@@ -27,13 +27,6 @@ class MainActivity : AppCompatActivity() {
         findViewById(R.id.currentTextView)
     }
 
-    val handler = Handler(Looper.getMainLooper(), Handler.Callback {
-
-        currentTextView.text = String.format(Locale.getDefault(), "Current opacity: %d", it.what)
-        cakeImageView.alpha = it.what / 100f
-        true
-    })
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -45,7 +38,9 @@ class MainActivity : AppCompatActivity() {
                 repeat(100) {
                     withContext(Dispatchers.Main) {
 
-                        handler.sendEmptyMessage(it)
+                        currentTextView.text = String.format(Locale.getDefault(), "Current opacity: %d", it)
+                        cakeImageView.alpha = it / 100f
+
                     }
                     delay(40)
                 }
